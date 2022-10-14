@@ -1,2 +1,4 @@
 .idea
 .bundle
+#Temporary exclusions
+Gemfile.lock.bak
