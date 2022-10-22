@@ -1,4 +1,4 @@
-require './layers/interface-adapters/entity/Slot'
+require 'carpark/domain/Slot'
 
 class SlotList
    EMPTY_VALUE = :nil
