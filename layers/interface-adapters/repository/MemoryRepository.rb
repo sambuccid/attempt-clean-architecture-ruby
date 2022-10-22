@@ -1,4 +1,4 @@
-require './layers/interface-adapters/entity/SlotList'
+require 'carpark/domain/SlotList'
 
 class MemoryRepository
 
