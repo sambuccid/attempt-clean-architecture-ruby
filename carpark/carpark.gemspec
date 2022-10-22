@@ -3,6 +3,6 @@ Gem::Specification.new do |s|
   s.version     = "1.0.0"
   s.summary     = "Business logic for carpark application"
   s.description = ""
-  s.files       = ["lib/carpark.rb", "lib/carpark/domain/Slot.rb"]
+  s.files       = Dir['lib/**/*','*.gemspec']
   s.authors     = ["Sambuccid"]
 end

@@ -1,11 +1,7 @@
-require './layers/interface-adapters/controller/application'
 require 'rspec'
-require 'rack/test'
-require './layers/frameworks/settings'
-require './layers/interface-adapters/entity/exceptions/DuplicateCar'
+require 'carpark/domain/exceptions/DuplicateCar' #TODO reference it locally
 
 describe SlotList do
-  include Rack::Test::Methods
 
   class MockedSetting
     def max_slots

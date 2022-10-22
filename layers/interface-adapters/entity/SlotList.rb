@@ -1,4 +1,4 @@
-require 'carpark/domain/Slot'
+require 'carpark/domain/Slot' #TODO reference it locally
 
 class SlotList
    EMPTY_VALUE = :nil

@@ -7,7 +7,7 @@ require './layers/interface-adapters/use-case/SlotsUseCase'
 require './layers/interface-adapters/repository/MemoryRepository'
 require './layers/interface-adapters/entity/exceptions/ParkIsFull'
 require './layers/interface-adapters/entity/exceptions/InvalidSlot'
-require './layers/interface-adapters/entity/exceptions/DuplicateCar'
+require 'carpark/domain/exceptions/DuplicateCar'
 require './layers/interface-adapters/entity/exceptions/CarNotExisting'
 require './layers/interface-adapters/controller/helper/AppHelper'
 
