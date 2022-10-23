@@ -1,7 +1,4 @@
 require 'json'
-require './frameworks/settings'
-require 'carpark/use_case/SlotsUseCase'
-require './repository/MemoryRepository'
 require 'carpark/domain/exceptions/ParkIsFull'
 require 'carpark/domain/exceptions/InvalidSlot'
 require 'carpark/domain/exceptions/DuplicateCar'
@@ -11,11 +8,11 @@ require './controller/helper/ControllerHelper'
 class Controller
   include ControllerHelper
 
-  def initialize(setting = Setting.new)
+  def initialize(setting, memRepository, slotUseCase)
     @setting = setting
 
-    @memRepository = MemoryRepository.new(setting)
-    @slotUseCase = SlotsUseCase.new(@memRepository)
+    @memRepository = memRepository
+    @slotUseCase = slotUseCase
   end
 
   def availableParkSlots

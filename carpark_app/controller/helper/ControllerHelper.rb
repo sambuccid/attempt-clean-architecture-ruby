@@ -1,4 +1,3 @@
-
 module ControllerHelper
   def paramExists?(param, message)
     unless !param.nil? &&

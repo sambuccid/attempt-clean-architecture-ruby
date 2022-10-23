@@ -14,11 +14,10 @@ require './controller/Controller'
 class Application < Sinatra::Base
   def initialize(setting = Setting.new)
     super
-    @setting = setting
 
-    @memRepository = MemoryRepository.new(setting)
-    @slotUseCase = SlotsUseCase.new(@memRepository)
-    @controller = Controller.new(@setting)
+    memRepository = MemoryRepository.new(setting)
+    slotUseCase = SlotsUseCase.new(memRepository)
+    @controller = Controller.new(setting, memRepository, slotUseCase)
   end
 
   def processControllerReturn(controllerReturn)
