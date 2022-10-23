@@ -64,10 +64,4 @@ class Controller
       userError 'car is not in the park'
     end
   end
-
-  # configure do
-  #   set :show_exceptions, true
-  #   enable :dump_errors,:raise_errors
-  #   use Rack::ShowExceptions
-  # end
 end
