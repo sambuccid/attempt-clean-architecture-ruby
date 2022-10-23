@@ -1,0 +1,67 @@
+require 'json'
+require 'carpark/domain/exceptions/ParkIsFull'
+require 'carpark/domain/exceptions/InvalidSlot'
+require 'carpark/domain/exceptions/DuplicateCar'
+require 'carpark/domain/exceptions/CarNotExisting'
+require './controller/helper/ControllerHelper'
+
+class Controller
+  include ControllerHelper
+
+  def initialize(setting, memRepository, slotUseCase)
+    @setting = setting
+
+    @memRepository = memRepository
+    @slotUseCase = slotUseCase
+  end
+
+  def availableParkSlots
+    availableSlots = @slotUseCase.availableSlots
+    success availableSlots.to_json
+  end
+
+  def checkInCar(name)
+    error = paramExists? name, "'name' parameter missing"
+    return error if !error.nil?
+    
+    begin
+      assignedSlot = @slotUseCase.addCar(name)
+      success( { slot: assignedSlot }.to_json )
+    rescue ParkIsFull
+      return userError 'no slot available'
+    rescue DuplicateCar
+      return userError "Car '#{name}' is already checked in"
+    end
+  end
+
+  def findCarIn(slot)
+    error = paramExists? slot, "'slot' parameter missing"
+    return error if !error.nil?
+
+    error = validateParam slot, "'slot' should be a number" do
+      |slot| /\A\d+\z/.match(slot)
+    end
+    return error if !error.nil?
+
+    slot = slot.to_i
+    begin
+      carName = @slotUseCase.getCarIn(slot)
+      success( {car: carName}.to_json )
+    rescue InvalidSlot
+      notFound "The specified slot doesn't exist"
+    end
+  end
+
+
+  def checkOutCar(name)
+    error = paramExists? name, "'name' parameter missing"
+    return error if !error.nil?
+
+    begin
+      @slotUseCase.removeCar(name)
+      success ""
+    rescue CarNotExisting
+      userError 'car is not in the park'
+    end
+  end
+end
