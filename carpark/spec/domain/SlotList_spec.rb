@@ -1,11 +1,8 @@
-require './layers/interface-adapters/controller/application'
 require 'rspec'
-require 'rack/test'
-require './layers/frameworks/settings'
-require './layers/interface-adapters/entity/exceptions/DuplicateCar'
+require 'carpark/domain/exceptions/DuplicateCar'
+require 'carpark/domain/SlotList'
 
 describe SlotList do
-  include Rack::Test::Methods
 
   class MockedSetting
     def max_slots
@@ -102,8 +99,6 @@ describe SlotList do
                                          Slot.new("macchina", Time.now - 13*60))
       #
       slotList = SlotList.new(MockedSetting.new, initSlots)
-      # slot = slotList.bookSlot('macchina')
-      # slotList.slots[slot] =
       # When we check out the car
       time = slotList.emptySlot(0)
       # We get back the duration of the slot in minutes
