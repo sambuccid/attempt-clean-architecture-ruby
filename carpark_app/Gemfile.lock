@@ -1,5 +1,5 @@
 PATH
-  remote: carpark
+  remote: ../carpark
   specs:
     carpark (1.0.0)
 
