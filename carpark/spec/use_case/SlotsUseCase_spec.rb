@@ -1,8 +1,7 @@
 require 'rspec'
-require 'rack/test'
+require 'carpark/use_case/SlotsUseCase'
 
 describe SlotsUseCase do
-  include Rack::Test::Methods
 
   class MockedSetting
     def max_slots
