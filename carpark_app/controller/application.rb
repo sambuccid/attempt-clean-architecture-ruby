@@ -20,16 +20,33 @@ class Application < Sinatra::Base
     body controllerReturn[:body]
   end
 
-  get '/available-park-slots' do
-    ret = @controller.availableParkSlots
-    processControllerReturn(ret)
+  def self.passToController(method: nil, path: nil, controllerMethod: nil, parameter: nil)
+    throw "Method missing" if method.nil?
+    throw "Path missing" if path.nil?
+    throw "controller method missing" if controllerMethod.nil?
+    self.send method, path do
+      ret = unless parameter.nil?
+        param = params[parameter]
+        @controller.send controllerMethod, param
+      else
+        @controller.send controllerMethod
+      end
+      processControllerReturn(ret)
+    end
   end
 
-  post '/check-in-car' do
-    name = params["name"]
-    ret = @controller.checkInCar(name)
-    processControllerReturn(ret)
-  end
+  passToController(
+    method: :get,
+    path: '/available-park-slots',
+    controllerMethod: :availableParkSlots
+  )
+
+  passToController(
+    method: :post,
+    path: '/check-in-car',
+    controllerMethod: :checkInCar,
+    parameter: "name"
+  )
 
   get '/find-car-in' do
     slot = params["slot"]
