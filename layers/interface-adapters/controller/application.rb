@@ -5,10 +5,10 @@ require 'sinatra/required_params'
 require './layers/frameworks/settings'
 require './layers/interface-adapters/use-case/SlotsUseCase'
 require './layers/interface-adapters/repository/MemoryRepository'
-require './layers/interface-adapters/entity/exceptions/ParkIsFull'
-require './layers/interface-adapters/entity/exceptions/InvalidSlot'
+require 'carpark/domain/exceptions/ParkIsFull'
+require 'carpark/domain/exceptions/InvalidSlot'
 require 'carpark/domain/exceptions/DuplicateCar'
-require './layers/interface-adapters/entity/exceptions/CarNotExisting'
+require 'carpark/domain/exceptions/CarNotExisting'
 require './layers/interface-adapters/controller/helper/AppHelper'
 
 class Application < Sinatra::Base
