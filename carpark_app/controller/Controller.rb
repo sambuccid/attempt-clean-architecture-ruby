@@ -56,15 +56,17 @@ class Controller
   end
 
 
-  # post '/check-out-car' do
-  #   param_exists :name, "'name' parameter missing"
-  #   begin
-  #     @slotUseCase.removeCar(params["name"])
-  #     nil
-  #   rescue CarNotExisting
-  #     user_error_400 'car is not in the park'
-  #   end
-  # end
+  def checkOutCar(name)
+    error = paramExists? name, "'name' parameter missing"
+    return error if !error.nil?
+
+    begin
+      @slotUseCase.removeCar(name)
+      success ""
+    rescue CarNotExisting
+      userError 'car is not in the park'
+    end
+  end
 
   # configure do
   #   set :show_exceptions, true
