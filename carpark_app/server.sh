@@ -1,2 +1,2 @@
 bundle install
-bundle exec ruby layers/frameworks/run.rb
+bundle exec ruby frameworks/run.rb

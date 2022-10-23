@@ -2,14 +2,14 @@ require 'sinatra'
 require 'json'
 require 'sinatra/base'
 require 'sinatra/required_params'
-require './layers/frameworks/settings'
+require './frameworks/settings'
 require 'carpark/use_case/SlotsUseCase'
-require './layers/interface-adapters/repository/MemoryRepository'
+require './repository/MemoryRepository'
 require 'carpark/domain/exceptions/ParkIsFull'
 require 'carpark/domain/exceptions/InvalidSlot'
 require 'carpark/domain/exceptions/DuplicateCar'
 require 'carpark/domain/exceptions/CarNotExisting'
-require './layers/interface-adapters/controller/helper/AppHelper'
+require './controller/helper/AppHelper'
 
 class Application < Sinatra::Base
   helpers Sinatra::RequiredParams

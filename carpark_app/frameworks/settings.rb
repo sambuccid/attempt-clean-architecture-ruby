@@ -1,4 +1,3 @@
-
 class Setting
   def max_slots
     500

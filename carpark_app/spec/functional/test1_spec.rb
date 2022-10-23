@@ -1,7 +1,7 @@
-require './layers/interface-adapters/controller/application'
+require './controller/application'
 require 'rspec'
 require 'rack/test'
-require './layers/frameworks/settings'
+require './frameworks/settings'
 require 'securerandom'
 
 describe Application do
