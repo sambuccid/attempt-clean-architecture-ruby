@@ -1,3 +1,3 @@
-require './controller/application'
+require './controller/Application'
 
 Application.run!
