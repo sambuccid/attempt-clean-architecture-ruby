@@ -48,17 +48,19 @@ class Application < Sinatra::Base
     parameter: "name"
   )
 
-  get '/find-car-in' do
-    slot = params["slot"]
-    ret = @controller.findCarIn(slot)
-    processControllerReturn(ret)
-  end
+  passToController(
+    method: :get,
+    path: '/find-car-in',
+    controllerMethod: :findCarIn,
+    parameter: "slot"
+  )
 
-
-  post '/check-out-car' do
-    ret = @controller.checkOutCar(params["name"])
-    processControllerReturn(ret)
-  end
+  passToController(
+    method: :post,
+    path: '/check-out-car',
+    controllerMethod: :checkOutCar,
+    parameter: "name"
+  )
 
   configure do
     set :show_exceptions, true
