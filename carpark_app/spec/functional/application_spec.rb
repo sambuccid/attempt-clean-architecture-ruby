@@ -31,7 +31,7 @@ describe Application do
 
   context "Get to /find-car-in" do
     let(:response) {
-      resp = post 'check-in-car', {name: "ciccio"}
+      resp = post 'check-in-car', {name: "car1"}
       slot = JSON.parse(resp.body)["slot"]
       get "/find-car-in", {slot: slot}
     }

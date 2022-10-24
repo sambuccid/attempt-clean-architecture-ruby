@@ -84,7 +84,7 @@ describe "Controller endpoints" do
 
   context "findCarIn" do
     let(:response) {
-      resp = controller.checkInCar("ciccio")
+      resp = controller.checkInCar("car1")
       slot = JSON.parse(resp[:body])["slot"]
       slot = slot.to_s
       controller.findCarIn(slot)
@@ -95,7 +95,7 @@ describe "Controller endpoints" do
     end
 
     it "returns car name in that place" do
-      expect(JSON.parse(response[:body])["car"]).to eq("ciccio")
+      expect(JSON.parse(response[:body])["car"]).to eq("car1")
     end
   end
 
