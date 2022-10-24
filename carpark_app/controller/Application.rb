@@ -2,7 +2,6 @@ require 'sinatra'
 require 'json'
 require 'sinatra/base'
 require './frameworks/settings'
-require 'carpark/use_case/SlotsUseCase'
 require './repository/MemoryRepository'
 require './controller/Controller'
 
@@ -11,8 +10,7 @@ class Application < Sinatra::Base
     super
 
     memRepository = MemoryRepository.new(setting)
-    slotUseCase = SlotsUseCase.new(memRepository)
-    @controller = Controller.new(setting, memRepository, slotUseCase)
+    @controller = Controller.new(setting, memRepository)
   end
 
   def processControllerReturn(controllerReturn)

@@ -1,7 +1,6 @@
 require './controller/Controller'
 require 'rspec'
 require 'securerandom'
-require 'carpark/use_case/SlotsUseCase'
 require './repository/MemoryRepository'
 
 describe "Controller endpoints" do
@@ -15,8 +14,7 @@ describe "Controller endpoints" do
   let(:controller) {
     setting = MockedSetting.new
     memRepository = MemoryRepository.new(setting)
-    slotUseCase = SlotsUseCase.new(memRepository)
-    Controller.new(setting, memRepository, slotUseCase)
+    Controller.new(setting, memRepository)
   }
   
   context "availableParkSlots" do

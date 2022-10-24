@@ -4,6 +4,7 @@ require 'carpark/domain/exceptions/InvalidSlot'
 require 'carpark/domain/exceptions/DuplicateCar'
 require 'carpark/domain/exceptions/CarNotExisting'
 require './controller/helper/ControllerHelper'
+require 'carpark/use_case/SlotsUseCase'
 
 class Controller
   include ControllerHelper
@@ -12,11 +13,12 @@ class Controller
     @setting = setting
 
     @memRepository = memRepository
-    @slotUseCase = slotUseCase
+    @slotUseCase = SlotsUseCase.new(memRepository)
+    @availableSlotsUC = AvailableSlotsUC.new(memRepository)
   end
 
   def availableParkSlots
-    availableSlots = @slotUseCase.availableSlots
+    availableSlots = @availableSlotsUC.do
     success availableSlots.to_json
   end
 
