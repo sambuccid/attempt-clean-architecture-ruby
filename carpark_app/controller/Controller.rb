@@ -5,11 +5,12 @@ require 'carpark/domain/exceptions/DuplicateCar'
 require 'carpark/domain/exceptions/CarNotExisting'
 require './controller/helper/ControllerHelper'
 require 'carpark/use_case/SlotsUseCase'
+require 'carpark/use_case/AvailableSlotsUC'
 
 class Controller
   include ControllerHelper
 
-  def initialize(setting, memRepository, slotUseCase)
+  def initialize(setting, memRepository)
     @setting = setting
 
     @memRepository = memRepository

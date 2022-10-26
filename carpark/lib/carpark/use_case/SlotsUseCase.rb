@@ -4,11 +4,6 @@ class SlotsUseCase
     @repository = repository
   end
 
-  def availableSlots
-    slotList = @repository.getSlotList
-    slotList.availableSlots
-  end
-
   def addCar(carName)
     slotList = @repository.getSlotList
     slot = slotList.bookSlot(carName)
