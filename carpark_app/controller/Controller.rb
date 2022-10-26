@@ -7,6 +7,7 @@ require './controller/helper/ControllerHelper'
 require 'carpark/use_case/SlotsUseCase'
 require 'carpark/use_case/AvailableSlotsUC'
 require 'carpark/use_case/BookSlotUC'
+require 'carpark/use_case/GetCarInSlotUC'
 
 class Controller
   include ControllerHelper
@@ -18,6 +19,7 @@ class Controller
     @slotUseCase = SlotsUseCase.new(memRepository)
     @availableSlotsUC = AvailableSlotsUC.new(memRepository)
     @bookSlotUC = BookSlotUC.new(memRepository)
+    @getCarInSlotUC = GetCarInSlotUC.new(memRepository)
   end
 
   def availableParkSlots
@@ -50,7 +52,8 @@ class Controller
 
     slot = slot.to_i
     begin
-      carName = @slotUseCase.getCarIn(slot)
+      carName = @getCarInSlotUC.do(slot)
+      # carName = @slotUseCase.getCarIn(slot)
       success( {car: carName}.to_json )
     rescue InvalidSlot
       notFound "The specified slot doesn't exist"
