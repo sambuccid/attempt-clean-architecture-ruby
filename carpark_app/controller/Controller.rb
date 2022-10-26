@@ -53,13 +53,11 @@ class Controller
     slot = slot.to_i
     begin
       carName = @getCarInSlotUC.do(slot)
-      # carName = @slotUseCase.getCarIn(slot)
       success( {car: carName}.to_json )
     rescue InvalidSlot
       notFound "The specified slot doesn't exist"
     end
   end
-
 
   def checkOutCar(name)
     error = paramExists? name, "'name' parameter missing"
