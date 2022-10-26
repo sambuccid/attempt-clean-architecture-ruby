@@ -6,6 +6,7 @@ require 'carpark/domain/exceptions/CarNotExisting'
 require './controller/helper/ControllerHelper'
 require 'carpark/use_case/SlotsUseCase'
 require 'carpark/use_case/AvailableSlotsUC'
+require 'carpark/use_case/BookSlotUC'
 
 class Controller
   include ControllerHelper
@@ -16,6 +17,7 @@ class Controller
     @memRepository = memRepository
     @slotUseCase = SlotsUseCase.new(memRepository)
     @availableSlotsUC = AvailableSlotsUC.new(memRepository)
+    @bookSlotUC = BookSlotUC.new(memRepository)
   end
 
   def availableParkSlots
@@ -28,7 +30,7 @@ class Controller
     return error if !error.nil?
     
     begin
-      assignedSlot = @slotUseCase.addCar(name)
+      assignedSlot = @bookSlotUC.do(name)
       success( { slot: assignedSlot }.to_json )
     rescue ParkIsFull
       return userError 'no slot available'
