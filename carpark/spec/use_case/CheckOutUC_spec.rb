@@ -1,8 +1,7 @@
 require 'rspec'
-require 'carpark/use_case/SlotsUseCase'
+require 'carpark/use_case/CheckOutUC'
 
-describe SlotsUseCase do
-
+describe CheckOutUC do
   class MockedSetting
     def max_slots
       12
@@ -23,10 +22,10 @@ describe SlotsUseCase do
       slotList.bookSlot("car1")
 
       repository = create_repository_returning(slotList)
-      useCase = SlotsUseCase.new(repository)
+      useCase = CheckOutUC.new(repository)
 
       # When I check out the car
-      bookingDuration = useCase.removeCar("car1")
+      bookingDuration = useCase.do("car1")
 
       # Then I get the number of minutes the car was booked for
       expect(bookingDuration).to be_a(Integer)

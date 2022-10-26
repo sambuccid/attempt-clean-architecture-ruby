@@ -4,19 +4,26 @@ require 'carpark/domain/exceptions/InvalidSlot'
 require 'carpark/domain/exceptions/DuplicateCar'
 require 'carpark/domain/exceptions/CarNotExisting'
 require './controller/helper/ControllerHelper'
+require 'carpark/use_case/AvailableSlotsUC'
+require 'carpark/use_case/BookSlotUC'
+require 'carpark/use_case/GetCarInSlotUC'
+require 'carpark/use_case/CheckOutUC'
 
 class Controller
   include ControllerHelper
 
-  def initialize(setting, memRepository, slotUseCase)
+  def initialize(setting, memRepository)
     @setting = setting
 
     @memRepository = memRepository
-    @slotUseCase = slotUseCase
+    @availableSlotsUC = AvailableSlotsUC.new(memRepository)
+    @bookSlotUC = BookSlotUC.new(memRepository)
+    @getCarInSlotUC = GetCarInSlotUC.new(memRepository)
+    @checkOutUC = CheckOutUC.new(memRepository)
   end
 
   def availableParkSlots
-    availableSlots = @slotUseCase.availableSlots
+    availableSlots = @availableSlotsUC.do
     success availableSlots.to_json
   end
 
@@ -25,7 +32,7 @@ class Controller
     return error if !error.nil?
     
     begin
-      assignedSlot = @slotUseCase.addCar(name)
+      assignedSlot = @bookSlotUC.do(name)
       success( { slot: assignedSlot }.to_json )
     rescue ParkIsFull
       return userError 'no slot available'
@@ -45,20 +52,19 @@ class Controller
 
     slot = slot.to_i
     begin
-      carName = @slotUseCase.getCarIn(slot)
+      carName = @getCarInSlotUC.do(slot)
       success( {car: carName}.to_json )
     rescue InvalidSlot
       notFound "The specified slot doesn't exist"
     end
   end
 
-
   def checkOutCar(name)
     error = paramExists? name, "'name' parameter missing"
     return error if !error.nil?
 
     begin
-      @slotUseCase.removeCar(name)
+      @checkOutUC.do(name)
       success ""
     rescue CarNotExisting
       userError 'car is not in the park'
