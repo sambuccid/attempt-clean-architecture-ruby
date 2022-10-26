@@ -4,10 +4,10 @@ require 'carpark/domain/exceptions/InvalidSlot'
 require 'carpark/domain/exceptions/DuplicateCar'
 require 'carpark/domain/exceptions/CarNotExisting'
 require './controller/helper/ControllerHelper'
-require 'carpark/use_case/SlotsUseCase'
 require 'carpark/use_case/AvailableSlotsUC'
 require 'carpark/use_case/BookSlotUC'
 require 'carpark/use_case/GetCarInSlotUC'
+require 'carpark/use_case/CheckOutUC'
 
 class Controller
   include ControllerHelper
@@ -16,10 +16,10 @@ class Controller
     @setting = setting
 
     @memRepository = memRepository
-    @slotUseCase = SlotsUseCase.new(memRepository)
     @availableSlotsUC = AvailableSlotsUC.new(memRepository)
     @bookSlotUC = BookSlotUC.new(memRepository)
     @getCarInSlotUC = GetCarInSlotUC.new(memRepository)
+    @checkOutUC = CheckOutUC.new(memRepository)
   end
 
   def availableParkSlots
@@ -64,7 +64,7 @@ class Controller
     return error if !error.nil?
 
     begin
-      @slotUseCase.removeCar(name)
+      @checkOutUC.do(name)
       success ""
     rescue CarNotExisting
       userError 'car is not in the park'
