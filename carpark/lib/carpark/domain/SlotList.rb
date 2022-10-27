@@ -29,7 +29,7 @@ class SlotList
     @slots
   end
 
-  def availableSlots
+  def emptySlots
     @slots.count(EMPTY_VALUE)
   end
 
@@ -84,7 +84,7 @@ class SlotList
     end
 
     def full?
-      availableSlots <= 0
+      emptySlots <= 0
     end
 
     def slotExist?(slot)

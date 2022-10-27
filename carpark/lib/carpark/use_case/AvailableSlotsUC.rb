@@ -6,6 +6,6 @@ class AvailableSlotsUC
   
   def do
     slotList = @repository.getSlotList
-    slotList.availableSlots
+    slotList.emptySlots
   end
 end

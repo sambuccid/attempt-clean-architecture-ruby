@@ -40,7 +40,7 @@ describe SlotList do
                                                Slot.new("2", Time.now))
 
       slotList = SlotList.new(MockedSetting.new, slots_from_repository)
-      slotsAvailable = slotList.availableSlots
+      slotsAvailable = slotList.emptySlots
       expect(slotsAvailable).to eq(MockedSetting.new.max_slots - 2)
     end
   end
@@ -49,7 +49,7 @@ describe SlotList do
     it "we have less slot available when we book a slot" do
       slotList = SlotList.new(MockedSetting.new)
       slotList.bookSlot('macchina')
-      slotsAvailable = slotList.availableSlots
+      slotsAvailable = slotList.emptySlots
       expect(slotsAvailable).to eq(MockedSetting.new.max_slots - 1)
     end
 
