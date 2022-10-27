@@ -5,8 +5,8 @@ class GetCarInSlotUC
   
   def do(slot)
     slotList = @repository.getSlotList
-    carName = slotList.getCarIn(slot)
-    carName
+    slot = slotList.getSlot(slot)
+    slot&.carName
   end
 end
   

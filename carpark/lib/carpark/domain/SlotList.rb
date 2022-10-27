@@ -43,14 +43,14 @@ class SlotList
     idx
   end
 
-  def getCarIn(slot)
+  def getSlot(slot)
     unless slotExist? slot
       raise InvalidSlot
     end
     if @slots[slot] == EMPTY_VALUE
       nil
     else
-      @slots[slot].carName
+      @slots[slot]
     end
   end
 
