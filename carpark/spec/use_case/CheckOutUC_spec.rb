@@ -19,7 +19,7 @@ describe CheckOutUC do
     it "gives back how long the slot was occupied for" do
       # Given I booked a slot
       slotList = SlotList.new(MockedSetting.new)
-      slotList.bookSlot("car1")
+      slotList.setSlot("car1")
 
       repository = create_repository_returning(slotList)
       useCase = CheckOutUC.new(repository)

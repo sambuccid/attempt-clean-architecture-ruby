@@ -19,7 +19,7 @@ class SlotList
       end
 
       slots.each_with_index do |slot, index|
-        setSlot(index, slot)
+        setSlotValue(index, slot)
       end
     end
   end
@@ -32,13 +32,13 @@ class SlotList
     @slots.count(EMPTY_VALUE)
   end
 
-  def bookSlot(carName)
+  def setSlot(carName)
     if full?
       raise ParkIsFull
     end
     idx = getFirstAvailableSlot
     slot = Slot.new(carName, Time.now)
-    setSlot(idx, slot)
+    setSlotValue(idx, slot)
     idx
   end
 
@@ -75,7 +75,7 @@ class SlotList
       nil
     end
     timeBooked = @slots[slot].timeBooked
-    setSlot(slot, EMPTY_VALUE)
+    setSlotValue(slot, EMPTY_VALUE)
     bookingDurationSeconds = Time.now - timeBooked
     bookingDurationMinutes = (bookingDurationSeconds / 60).ceil
     bookingDurationMinutes
@@ -98,7 +98,7 @@ class SlotList
       @slots.length() > slot
     end
 
-    def setSlot(slotIdx, slot)
+    def setSlotValue(slotIdx, slot)
       @slots[slotIdx] = slot
     end
 end

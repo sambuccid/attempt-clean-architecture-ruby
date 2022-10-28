@@ -49,7 +49,7 @@ describe SlotList do
     it "we get the duration of how long the slot was booked for in minutes" do
       # Given we booked a slot
       slotList = SlotList.new(MockedSetting.new)
-      slot = slotList.bookSlot('macchina')
+      slot = slotList.setSlot('macchina')
       # When we check out the car
       time = slotList.emptySlot(slot)
       # We get back the duration of the slot in minutes
