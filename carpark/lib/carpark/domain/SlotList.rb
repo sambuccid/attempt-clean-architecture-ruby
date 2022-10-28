@@ -12,7 +12,6 @@ class SlotList
   def initialize(settings, slots=nil)
     @slots = Array.new(settings.max_slots)
     @slots.fill(EMPTY_VALUE)
-    @registeredCars = Set.new()
 
     if !slots.nil?
       if slots.length() != settings.max_slots
@@ -54,6 +53,14 @@ class SlotList
     end
   end
 
+  def getAllSlots()
+    allSlots = []
+    @slots.each_index do |index|
+      allSlots[index] = getSlot(index)
+    end
+    allSlots
+  end
+
   def slotOfCar(carName)
     if carName.nil?
       raise InvalidName
@@ -92,15 +99,6 @@ class SlotList
     end
 
     def setSlot(slotIdx, slot)
-      if slot != EMPTY_VALUE
-        if @registeredCars.include?(slot.carName)
-          raise DuplicateCar
-        end
-        @registeredCars.add(slot.carName)
-      elsif @slots[slotIdx] != EMPTY_VALUE
-        slotRemoved = @slots[slotIdx]
-        @registeredCars.delete(slotRemoved.carName)
-      end
       @slots[slotIdx] = slot
     end
 end
