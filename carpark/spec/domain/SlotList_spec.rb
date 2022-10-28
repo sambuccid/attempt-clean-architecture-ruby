@@ -45,44 +45,6 @@ describe SlotList do
     end
   end
 
-  context "book a slot" do
-    it "we have less slot available when we book a slot" do
-      slotList = SlotList.new(MockedSetting.new)
-      slotList.bookSlot('macchina')
-      slotsAvailable = slotList.emptySlots
-      expect(slotsAvailable).to eq(MockedSetting.new.max_slots - 1)
-    end
-
-    it "shouldn't be possible to book a slot with the same carName" do
-      slotList = SlotList.new(MockedSetting.new)
-      carName = 'car'
-      slotList.bookSlot(carName)
-      expect {
-        slotList.bookSlot(carName)
-      }.to raise_error(DuplicateCar)
-    end
-
-    it "should be possible to book a slot with a car that was previously booked but then left" do
-      slotList = SlotList.new(MockedSetting.new)
-      carName = 'car'
-      slot = slotList.bookSlot(carName)
-      slotList.emptySlot(slot)
-      slotList.bookSlot(carName)
-    end
-
-    it "saves the time the slot was booked" do
-      slotList = SlotList.new(MockedSetting.new)
-      carName = 'car'
-      before = Time.now
-      slot = slotList.bookSlot(carName)
-      after = Time.now
-      datetime = slotList.slotBookTime(slot)
-      expect(datetime).to be_a(Time)
-      expect(datetime).to be >= before
-      expect(datetime).to be <= after
-    end
-  end
-
   context "when we check out a slot" do
     it "we get the duration of how long the slot was booked for in minutes" do
       # Given we booked a slot
