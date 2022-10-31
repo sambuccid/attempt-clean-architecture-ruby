@@ -44,27 +44,4 @@ describe SlotList do
       expect(slotsAvailable).to eq(MockedSetting.new.max_slots - 2)
     end
   end
-
-  context "when we check out a slot" do
-    it "we get the duration of how long the slot was booked for in minutes" do
-      # Given we booked a slot
-      slotList = SlotList.new(MockedSetting.new)
-      slot = slotList.setSlot('macchina', Time.now)
-      # When we check out the car
-      time = slotList.emptySlot(slot)
-      # We get back the duration of the slot in minutes
-      expect(time).to be_a(Integer)
-    end
-    it "the duration we get back is correct" do
-      # Given we booked a slot 13 minutes ago
-      initSlots = build_init_array_slots(MockedSetting.new.max_slots,
-                                         Slot.new("macchina", Time.now - 13*60))
-      #
-      slotList = SlotList.new(MockedSetting.new, initSlots)
-      # When we check out the car
-      time = slotList.emptySlot(0)
-      # We get back the duration of the slot in minutes
-      expect(time).to eq(13).or eq(14)
-    end
-  end
 end

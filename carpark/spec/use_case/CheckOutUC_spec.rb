@@ -30,5 +30,20 @@ describe CheckOutUC do
       # Then I get the number of minutes the car was booked for
       expect(bookingDuration).to be_a(Integer)
     end
+
+    it "the duration we get back is correct" do
+      # Given we booked a slot 13 minutes ago
+      slotList = SlotList.new(MockedSetting.new)
+      slotList.setSlot("car1",  Time.now - 13*60)
+
+      repository = create_repository_returning(slotList)
+      useCase = CheckOutUC.new(repository)
+
+      # When I check out the car
+      bookingDuration = useCase.do("car1")
+
+      # Then I get back the correct duration in minutes
+      expect(bookingDuration).to eq(13).or eq(14)
+    end
   end
 end
