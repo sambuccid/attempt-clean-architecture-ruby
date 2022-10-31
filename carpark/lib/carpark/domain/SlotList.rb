@@ -79,10 +79,6 @@ class SlotList
     slot
   end
 
-  def slotBookTime(slot)
-    @slots[slot].timeBooked
-  end
-
   private
     def getFirstAvailableSlot
       @slots.find_index {|slot| slot == EMPTY_VALUE}
