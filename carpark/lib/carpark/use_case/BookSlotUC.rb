@@ -7,13 +7,19 @@ class BookSlotUC
   def do(carName)
     slotList = @repository.getSlotList
     
+    if slotList.full?
+      raise ParkIsFull
+    end
+
     if carNameAlreadyBooked?(slotList, carName)
       raise DuplicateCar
     end
+
+    slotNumber = slotList.getFirstEmptySlot
     
-    slot = slotList.setSlot(carName, Time.now)
+    slotList.setSlot(slotNumber, carName, Time.now)
     @repository.saveSlotList(slotList)
-    slot
+    slotNumber
   end
 
   private

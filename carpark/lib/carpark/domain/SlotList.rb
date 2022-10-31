@@ -32,14 +32,10 @@ class SlotList
     @slots.count(EMPTY_VALUE)
   end
 
-  def setSlot(carName, time)
-    if full?
-      raise ParkIsFull
-    end
-    idx = getFirstAvailableSlot
+  def setSlot(slotNumber, carName, time)
     slot = Slot.new(carName, time)
-    setSlotValue(idx, slot)
-    idx
+    setSlotValue(slotNumber, slot)
+    nil
   end
 
   def getSlot(slot)
@@ -79,14 +75,15 @@ class SlotList
     slot
   end
 
-  private
-    def getFirstAvailableSlot
-      @slots.find_index {|slot| slot == EMPTY_VALUE}
-    end
+  def getFirstEmptySlot
+    @slots.find_index {|slot| slot == EMPTY_VALUE}
+  end
 
-    def full?
-      emptySlots <= 0
-    end
+  def full?
+    emptySlots <= 0
+  end
+
+  private
 
     def slotExist?(slot)
       @slots.length() > slot
