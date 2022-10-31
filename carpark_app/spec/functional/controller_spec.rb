@@ -152,6 +152,18 @@ describe "Controller endpoints" do
       expect(JSON.parse(res[:body])["car"]).to eq(nil)
     end
 
+    it "returns the duration of the booking" do
+      # Given a car is already checked in
+      car = "car1"
+      res = controller.checkInCar(car)
+      slot = JSON.parse(res[:body])["slot"]
+      slot = slot.to_s
+      # When I check it out
+      res = controller.checkOutCar(car)
+      # I get the duration of the booking
+      expect(JSON.parse(res[:body])["duration"]).to be_a(Integer)
+    end
+
     it "gives error if name parameter not provided" do
       # Given I forget to specify a name parameter for a car
       carName = nil
