@@ -76,9 +76,7 @@ class SlotList
     end
     timeBooked = @slots[slot].timeBooked
     setSlotValue(slot, EMPTY_VALUE)
-    bookingDurationSeconds = Time.now - timeBooked
-    bookingDurationMinutes = (bookingDurationSeconds / 60).ceil
-    bookingDurationMinutes
+    timeBooked
   end
 
   def slotBookTime(slot)
