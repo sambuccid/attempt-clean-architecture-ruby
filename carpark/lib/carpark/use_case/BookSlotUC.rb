@@ -11,7 +11,7 @@ class BookSlotUC
       raise DuplicateCar
     end
     
-    slot = slotList.setSlot(carName)
+    slot = slotList.setSlot(carName, Time.now)
     @repository.saveSlotList(slotList)
     slot
   end

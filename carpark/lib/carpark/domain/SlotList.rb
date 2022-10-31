@@ -32,12 +32,12 @@ class SlotList
     @slots.count(EMPTY_VALUE)
   end
 
-  def setSlot(carName)
+  def setSlot(carName, time)
     if full?
       raise ParkIsFull
     end
     idx = getFirstAvailableSlot
-    slot = Slot.new(carName, Time.now)
+    slot = Slot.new(carName, time)
     setSlotValue(idx, slot)
     idx
   end
@@ -72,7 +72,7 @@ class SlotList
 
   def emptySlot(slot)
     if @slots[slot] == EMPTY_VALUE
-      nil
+      return nil
     end
     timeBooked = @slots[slot].timeBooked
     setSlotValue(slot, EMPTY_VALUE)
