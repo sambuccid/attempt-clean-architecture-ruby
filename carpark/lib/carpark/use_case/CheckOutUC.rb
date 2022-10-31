@@ -5,10 +5,17 @@ class CheckOutUC
   
     def do(carName)
       slotList = @repository.getSlotList
-      slot = slotList.slotOfCar(carName)
-      bookingDuration = slotList.emptySlot(slot)
+      slotNumber = slotList.slotOfCar(carName)
+      slot = slotList.emptySlot(slotNumber)
+
+      duration = Time.now - slot.timeBooked
       @repository.saveSlotList(slotList)
-      bookingDuration
+      convertToMinutes(duration)
+    end
+
+    private
+    def convertToMinutes(time)
+      (time / 60).ceil
     end
   end
   

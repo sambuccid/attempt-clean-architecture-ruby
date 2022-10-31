@@ -64,8 +64,8 @@ class Controller
     return error if !error.nil?
 
     begin
-      @checkOutUC.do(name)
-      success ""
+      duration = @checkOutUC.do(name)
+      success( {duration: duration}.to_json )
     rescue CarNotExisting
       userError 'car is not in the park'
     end

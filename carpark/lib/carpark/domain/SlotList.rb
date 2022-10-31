@@ -12,7 +12,6 @@ class SlotList
   def initialize(settings, slots=nil)
     @slots = Array.new(settings.max_slots)
     @slots.fill(EMPTY_VALUE)
-    @registeredCars = Set.new()
 
     if !slots.nil?
       if slots.length() != settings.max_slots
@@ -20,7 +19,7 @@ class SlotList
       end
 
       slots.each_with_index do |slot, index|
-        setSlot(index, slot)
+        setSlotValue(index, slot)
       end
     end
   end
@@ -29,29 +28,37 @@ class SlotList
     @slots
   end
 
-  def availableSlots
+  def emptySlots
     @slots.count(EMPTY_VALUE)
   end
 
-  def bookSlot(carName)
+  def setSlot(carName, time)
     if full?
       raise ParkIsFull
     end
     idx = getFirstAvailableSlot
-    slot = Slot.new(carName, Time.now)
-    setSlot(idx, slot)
+    slot = Slot.new(carName, time)
+    setSlotValue(idx, slot)
     idx
   end
 
-  def getCarIn(slot)
+  def getSlot(slot)
     unless slotExist? slot
       raise InvalidSlot
     end
     if @slots[slot] == EMPTY_VALUE
       nil
     else
-      @slots[slot].carName
+      @slots[slot]
     end
+  end
+
+  def getAllSlots()
+    allSlots = []
+    @slots.each_index do |index|
+      allSlots[index] = getSlot(index)
+    end
+    allSlots
   end
 
   def slotOfCar(carName)
@@ -63,19 +70,13 @@ class SlotList
     slot
   end
 
-  def emptySlot(slot)
-    if @slots[slot] == EMPTY_VALUE
-      nil
+  def emptySlot(slotNumber)
+    if @slots[slotNumber] == EMPTY_VALUE
+      return nil
     end
-    timeBooked = @slots[slot].timeBooked
-    setSlot(slot, EMPTY_VALUE)
-    bookingDurationSeconds = Time.now - timeBooked
-    bookingDurationMinutes = (bookingDurationSeconds / 60).ceil
-    bookingDurationMinutes
-  end
-
-  def slotBookTime(slot)
-    @slots[slot].timeBooked
+    slot = @slots[slotNumber]
+    setSlotValue(slotNumber, EMPTY_VALUE)
+    slot
   end
 
   private
@@ -84,23 +85,14 @@ class SlotList
     end
 
     def full?
-      availableSlots <= 0
+      emptySlots <= 0
     end
 
     def slotExist?(slot)
       @slots.length() > slot
     end
 
-    def setSlot(slotIdx, slot)
-      if slot != EMPTY_VALUE
-        if @registeredCars.include?(slot.carName)
-          raise DuplicateCar
-        end
-        @registeredCars.add(slot.carName)
-      elsif @slots[slotIdx] != EMPTY_VALUE
-        slotRemoved = @slots[slotIdx]
-        @registeredCars.delete(slotRemoved.carName)
-      end
+    def setSlotValue(slotIdx, slot)
       @slots[slotIdx] = slot
     end
 end
