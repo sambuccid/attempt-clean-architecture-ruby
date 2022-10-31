@@ -70,13 +70,13 @@ class SlotList
     slot
   end
 
-  def emptySlot(slot)
-    if @slots[slot] == EMPTY_VALUE
+  def emptySlot(slotNumber)
+    if @slots[slotNumber] == EMPTY_VALUE
       return nil
     end
-    timeBooked = @slots[slot].timeBooked
-    setSlotValue(slot, EMPTY_VALUE)
-    timeBooked
+    slot = @slots[slotNumber]
+    setSlotValue(slotNumber, EMPTY_VALUE)
+    slot
   end
 
   def slotBookTime(slot)
