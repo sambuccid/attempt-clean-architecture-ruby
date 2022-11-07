@@ -1,7 +1,7 @@
-require './controller/Controller'
+require './lib/controller/Controller'
 require 'rspec'
 require 'securerandom'
-require './repository/MemoryRepository'
+require './lib/repository/MemoryRepository'
 
 describe "Controller endpoints" do
 

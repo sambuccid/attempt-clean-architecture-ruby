@@ -2,8 +2,8 @@ require 'sinatra'
 require 'json'
 require 'sinatra/base'
 require './frameworks/settings'
-require './repository/MemoryRepository'
-require './controller/Controller'
+require './lib/repository/MemoryRepository'
+require './lib/controller/Controller'
 
 class WebServer < Sinatra::Base
   def initialize(setting = Setting.new)
