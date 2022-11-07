@@ -1,7 +1,7 @@
 PATH
-  remote: ../carpark_app
+  remote: ../carpark_interface_adapters
   specs:
-    carpark_app (1.0.0)
+    carpark_interface_adapters (1.0.0)
 
 PATH
   remote: ../carpark
@@ -104,7 +104,7 @@ PLATFORMS
 
 DEPENDENCIES
   carpark!
-  carpark_app!
+  carpark_interface_adapters!
   http
   puma
   rack

@@ -2,7 +2,7 @@ cd carpark
 ./tests.sh
 cd ..
 
-cd carpark_app
+cd carpark_interface_adapters
 ./tests.sh
 cd ..
 
