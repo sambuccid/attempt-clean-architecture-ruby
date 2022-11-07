@@ -1,7 +1,7 @@
-require './lib/controller/Controller'
+require 'carpark_app/controller/Controller'
 require 'rspec'
 require 'securerandom'
-require './lib/repository/MemoryRepository'
+require 'carpark_app/repository/MemoryRepository'
 
 describe "Controller endpoints" do
 

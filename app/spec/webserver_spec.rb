@@ -1,4 +1,4 @@
-require './lib/controller/WebServer'
+require './WebServer'
 require 'rspec'
 require 'rack/test'
 
