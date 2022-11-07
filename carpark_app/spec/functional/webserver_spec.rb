@@ -1,8 +1,8 @@
-require './controller/Application'
+require './controller/WebServer'
 require 'rspec'
 require 'rack/test'
 
-describe Application do
+describe WebServer do
  include Rack::Test::Methods
 
   class MockedSetting
@@ -11,7 +11,7 @@ describe Application do
     end
   end
 
-  let(:app) { Application.new(MockedSetting.new) }
+  let(:app) { WebServer.new(MockedSetting.new) }
 
   context "Get to /available-park-slots" do
     let(:response) { get "/available-park-slots" }

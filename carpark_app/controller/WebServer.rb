@@ -5,7 +5,7 @@ require './frameworks/settings'
 require './repository/MemoryRepository'
 require './controller/Controller'
 
-class Application < Sinatra::Base
+class WebServer < Sinatra::Base
   def initialize(setting = Setting.new)
     super
 
@@ -66,5 +66,3 @@ class Application < Sinatra::Base
     use Rack::ShowExceptions
   end
 end
-
-

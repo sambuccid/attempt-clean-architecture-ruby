@@ -1,3 +1,3 @@
-require './controller/Application'
+require './controller/WebServer'
 
-Application.run!
+WebServer.run!
