@@ -1,9 +1,9 @@
 require 'sinatra'
 require 'json'
 require 'sinatra/base'
-require './frameworks/settings'
-require './repository/MemoryRepository'
-require './controller/Controller'
+require 'carpark_interface_adapters/Setting'
+require 'carpark_interface_adapters/repository/MemoryRepository'
+require 'carpark_interface_adapters/controller/Controller'
 
 class WebServer < Sinatra::Base
   def initialize(setting = Setting.new)
