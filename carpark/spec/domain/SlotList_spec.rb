@@ -3,13 +3,8 @@ require 'carpark/domain/exceptions/DuplicateCar'
 require 'carpark/domain/SlotList'
 
 describe SlotList do
-
-  class MockedSetting
-    def max_slots
-      12
-    end
-  end
-
+  MAX_SLOTS = 12
+  
   def build_init_array_slots(length, *values)
     slots = Array.new(length)
     slots.fill(SlotList::EMPTY_VALUE)
@@ -22,26 +17,19 @@ describe SlotList do
 
   context "create new slotlist object" do
     it "creates an object with correct amount of slots" do
-      slotList = SlotList.new(MockedSetting.new.max_slots)
+      slotList = SlotList.new(MAX_SLOTS)
       length = slotList.getAllSlotsAsArray.length()
-      expect(length).to eq(MockedSetting.new.max_slots)
+      expect(length).to eq(MAX_SLOTS)
     end
 
     it "loads data of slots" do
-      # slots_from_repository = Array.new(MockedSetting.new.max_slots)
-      # slots_from_repository.fill(SlotsHolder::EMPTY_VALUE)
-      #
-      # #2 slots were already used
-      # slots_from_repository[0] = Slot.new("1", DateTime.now)
-      # slots_from_repository[1] = Slot.new("2", DateTime.now)
-
-      slots_from_repository = build_init_array_slots(MockedSetting.new.max_slots,
+      slots_from_repository = build_init_array_slots(MAX_SLOTS,
                                                Slot.new("1", Time.now),
                                                Slot.new("2", Time.now))
 
-      slotList = SlotList.new(MockedSetting.new.max_slots, slots_from_repository)
+      slotList = SlotList.new(MAX_SLOTS, slots_from_repository)
       slotsAvailable = slotList.emptySlots
-      expect(slotsAvailable).to eq(MockedSetting.new.max_slots - 2)
+      expect(slotsAvailable).to eq(MAX_SLOTS - 2)
     end
   end
 end

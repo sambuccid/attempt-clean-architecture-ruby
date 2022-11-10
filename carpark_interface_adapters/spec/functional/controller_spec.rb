@@ -4,17 +4,11 @@ require 'securerandom'
 require 'carpark_interface_adapters/repository/MemoryRepository'
 
 describe "Controller endpoints" do
-
-  class MockedSetting
-    def max_slots
-      12
-    end
-  end
+  MAX_SLOTS = 12
 
   let(:controller) {
-    setting = MockedSetting.new
-    memRepository = MemoryRepository.new(setting.max_slots)
-    Controller.new(setting, memRepository)
+    memRepository = MemoryRepository.new(MAX_SLOTS)
+    Controller.new(memRepository)
   }
   
   context "availableParkSlots" do
@@ -25,12 +19,12 @@ describe "Controller endpoints" do
     end
 
     it "returns all parking slots available when no cars got in" do
-      expect(JSON.parse(response[:body])).to eq(MockedSetting.new.max_slots)
+      expect(JSON.parse(response[:body])).to eq(MAX_SLOTS)
     end
 
     it "parking slot reduced when a car parks in" do
       controller.checkInCar("car1")
-      expect(JSON.parse(response[:body])).to eq(MockedSetting.new.max_slots - 1)
+      expect(JSON.parse(response[:body])).to eq(MAX_SLOTS - 1)
     end
   end
 
@@ -48,7 +42,7 @@ describe "Controller endpoints" do
 
   context "Errors - checkInCar" do
     it "error if all slots full" do
-      MockedSetting.new.max_slots.times do
+      MAX_SLOTS.times do
         controller.checkInCar(SecureRandom.uuid)
       end
       #calling one last time
@@ -104,7 +98,7 @@ describe "Controller endpoints" do
     end
 
     it "returns 404 if the slot doesn't exist" do
-      nonExistingSlot = MockedSetting.new.max_slots + 1
+      nonExistingSlot = MAX_SLOTS + 1
       nonExistingSlot = nonExistingSlot.to_s
       resp = controller.findCarIn(nonExistingSlot)
       expect(resp[:status]).to eq(404)

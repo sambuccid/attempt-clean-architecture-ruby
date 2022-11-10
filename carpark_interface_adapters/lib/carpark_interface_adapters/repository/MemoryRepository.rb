@@ -7,7 +7,7 @@ class MemoryRepository
       slots: nil
     }
 
-    #TODO this should create the SlotList
+    #TODO this should not create the SlotList
     emptySlotList = SlotList.new(max_slots)
     saveSlotList(emptySlotList)
   end

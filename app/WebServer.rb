@@ -10,7 +10,7 @@ class WebServer < Sinatra::Base
     super
 
     memRepository = MemoryRepository.new(setting.max_slots)
-    @controller = Controller.new(setting, memRepository)
+    @controller = Controller.new(memRepository)
   end
 
   def processControllerReturn(controllerReturn)
