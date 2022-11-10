@@ -45,7 +45,7 @@ describe "Controller endpoints" do
       MAX_SLOTS.times do
         controller.checkInCar(SecureRandom.uuid)
       end
-      #calling one last time
+      # calling one last time
       resp = controller.checkInCar("car1")
       expect(resp[:status]).to eq(400)
       expect(JSON.parse(resp[:body])["message"]).to eq("no slot available")

@@ -16,7 +16,8 @@ class MemoryRepository
 
   def saveSlotList(slotList)
     slotArray = slotList.getAllSlotsAsArray
-    @memory[:slots] = Marshal.load( Marshal.dump(slotArray) ) #A bit a hack, but for an in memory DB should be fine, closest to what a DB would actually do
+    # A bit of a hack, but for an in memory DB should be fine, it is very close to what an actual Repository would do
+    @memory[:slots] = Marshal.load( Marshal.dump(slotArray) )
     @max_slots = slotList.max_slots
   end
 end

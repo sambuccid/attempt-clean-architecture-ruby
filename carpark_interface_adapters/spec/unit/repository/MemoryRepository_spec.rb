@@ -6,7 +6,7 @@ describe MemoryRepository do
   MAX_SLOTS = 12
 
   context "create new MemoryRepository" do
-    #in the case of MemoryRepository it will always initialise one, but a normal repository would do it only if there isn't one persisted already
+    # in the case of MemoryRepository it will always initialise one, but a normal repository would do it only if there isn't one persisted already
     it "initialises and saves an empty SlotList" do
       # Given there is't any SlotList already persisted
       
