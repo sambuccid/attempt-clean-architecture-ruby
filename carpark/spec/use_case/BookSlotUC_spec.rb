@@ -27,7 +27,7 @@ describe BookSlotUC do
   end
 
   it "we have less slot available when we book a slot" do
-    slotList = SlotList.new(MockedSetting.new)
+    slotList = SlotList.new(MockedSetting.new.max_slots)
     useCase = makeUseCase(slotList)
     useCase.do('macchina')
 
@@ -37,7 +37,7 @@ describe BookSlotUC do
 
   it "shouldn't be possible to book a slot with the same carName" do
     carName = 'car'
-    slotList = SlotList.new(MockedSetting.new)
+    slotList = SlotList.new(MockedSetting.new.max_slots)
     useCase = makeUseCase(slotList)
 
     useCase.do(carName)
@@ -48,7 +48,7 @@ describe BookSlotUC do
 
   it "should be possible to book a slot with a car that was previously booked but then left" do
     carName = 'car'
-    slotList = SlotList.new(MockedSetting.new)
+    slotList = SlotList.new(MockedSetting.new.max_slots)
     useCase = makeUseCase(slotList)
     
     slot = useCase.do(carName)

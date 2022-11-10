@@ -13,7 +13,7 @@ describe "Controller endpoints" do
 
   let(:controller) {
     setting = MockedSetting.new
-    memRepository = MemoryRepository.new(setting)
+    memRepository = MemoryRepository.new(setting.max_slots)
     Controller.new(setting, memRepository)
   }
   

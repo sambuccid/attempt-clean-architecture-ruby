@@ -9,7 +9,7 @@ class WebServer < Sinatra::Base
   def initialize(setting = Setting.new)
     super
 
-    memRepository = MemoryRepository.new(setting)
+    memRepository = MemoryRepository.new(setting.max_slots)
     @controller = Controller.new(setting, memRepository)
   end
 

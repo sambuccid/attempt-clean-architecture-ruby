@@ -22,7 +22,7 @@ describe SlotList do
 
   context "create new slotlist object" do
     it "creates an object with correct amount of slots" do
-      slotList = SlotList.new(MockedSetting.new)
+      slotList = SlotList.new(MockedSetting.new.max_slots)
       length = slotList.getAllSlotsAsArray.length()
       expect(length).to eq(MockedSetting.new.max_slots)
     end
@@ -39,7 +39,7 @@ describe SlotList do
                                                Slot.new("1", Time.now),
                                                Slot.new("2", Time.now))
 
-      slotList = SlotList.new(MockedSetting.new, slots_from_repository)
+      slotList = SlotList.new(MockedSetting.new.max_slots, slots_from_repository)
       slotsAvailable = slotList.emptySlots
       expect(slotsAvailable).to eq(MockedSetting.new.max_slots - 2)
     end
