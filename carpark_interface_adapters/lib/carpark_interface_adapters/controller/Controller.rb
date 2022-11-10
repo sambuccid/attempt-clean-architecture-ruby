@@ -12,9 +12,7 @@ require 'carpark/use_case/CheckOutUC'
 class Controller
   include ControllerHelper
 
-  def initialize(setting, memRepository)
-    @setting = setting
-
+  def initialize(memRepository)
     @memRepository = memRepository
     @availableSlotsUC = AvailableSlotsUC.new(memRepository)
     @bookSlotUC = BookSlotUC.new(memRepository)

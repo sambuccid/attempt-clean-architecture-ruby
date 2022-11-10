@@ -2,11 +2,7 @@ require 'rspec'
 require 'carpark/use_case/CheckOutUC'
 
 describe CheckOutUC do
-  class MockedSetting
-    def max_slots
-      12
-    end
-  end
+  MAX_SLOTS = 12
 
   context "check out a car" do
     def create_repository_returning(slotList)
@@ -18,7 +14,7 @@ describe CheckOutUC do
 
     it "gives back how long the slot was occupied for" do
       # Given I booked a slot
-      slotList = SlotList.new(MockedSetting.new)
+      slotList = SlotList.new(MAX_SLOTS)
       slotList.setSlot(0, "car1", Time.now)
 
       repository = create_repository_returning(slotList)
@@ -33,7 +29,7 @@ describe CheckOutUC do
 
     it "the duration we get back is correct" do
       # Given we booked a slot 13 minutes ago
-      slotList = SlotList.new(MockedSetting.new)
+      slotList = SlotList.new(MAX_SLOTS)
       slotList.setSlot(0, "car1",  Time.now - 13*60)
 
       repository = create_repository_returning(slotList)

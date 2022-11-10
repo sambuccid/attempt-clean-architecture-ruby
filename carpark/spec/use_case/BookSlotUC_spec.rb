@@ -4,12 +4,8 @@ require 'carpark/use_case/BookSlotUC'
 require 'carpark/domain/SlotList'
 
 describe BookSlotUC do
+  MAX_SLOTS = 12
 
-  class MockedSetting
-    def max_slots
-      12
-    end
-  end
   class MockedRepository
     def initialize(slotList)
       @slotList = slotList
@@ -27,17 +23,17 @@ describe BookSlotUC do
   end
 
   it "we have less slot available when we book a slot" do
-    slotList = SlotList.new(MockedSetting.new)
+    slotList = SlotList.new(MAX_SLOTS)
     useCase = makeUseCase(slotList)
     useCase.do('macchina')
 
     slotsAvailable = slotList.emptySlots
-    expect(slotsAvailable).to eq(MockedSetting.new.max_slots - 1)
+    expect(slotsAvailable).to eq(MAX_SLOTS - 1)
   end
 
   it "shouldn't be possible to book a slot with the same carName" do
     carName = 'car'
-    slotList = SlotList.new(MockedSetting.new)
+    slotList = SlotList.new(MAX_SLOTS)
     useCase = makeUseCase(slotList)
 
     useCase.do(carName)
@@ -48,7 +44,7 @@ describe BookSlotUC do
 
   it "should be possible to book a slot with a car that was previously booked but then left" do
     carName = 'car'
-    slotList = SlotList.new(MockedSetting.new)
+    slotList = SlotList.new(MAX_SLOTS)
     useCase = makeUseCase(slotList)
     
     slot = useCase.do(carName)

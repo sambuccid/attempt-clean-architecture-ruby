@@ -9,12 +9,12 @@ require 'carpark/domain/exceptions/ParkIsFull'
 class SlotList
    EMPTY_VALUE = :nil
 
-  def initialize(settings, slots=nil)
-    @slots = Array.new(settings.max_slots)
+  def initialize(max_slots, slots=nil)
+    @slots = Array.new(max_slots)
     @slots.fill(EMPTY_VALUE)
 
     if !slots.nil?
-      if slots.length() != settings.max_slots
+      if slots.length() != max_slots
         throw "error of initialisation"
       end
 
@@ -81,6 +81,10 @@ class SlotList
 
   def full?
     emptySlots <= 0
+  end
+
+  def max_slots
+    @slots.length()
   end
 
   private
