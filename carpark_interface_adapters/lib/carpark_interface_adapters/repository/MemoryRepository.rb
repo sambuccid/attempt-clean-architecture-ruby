@@ -1,13 +1,11 @@
 require 'carpark/domain/SlotList'
 
 class MemoryRepository
-
   def initialize(max_slots)
     @memory = {
       slots: nil
     }
 
-    #TODO this should not create the SlotList
     emptySlotList = SlotList.new(max_slots)
     saveSlotList(emptySlotList)
   end
