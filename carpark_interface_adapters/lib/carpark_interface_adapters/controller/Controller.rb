@@ -2,7 +2,8 @@ require 'json'
 require 'carpark/use_case/exceptions/ParkIsFull'
 require 'carpark/domain/exceptions/InvalidSlot'
 require 'carpark/use_case/exceptions/DuplicateCar'
-require 'carpark/domain/exceptions/CarNotExisting'
+require 'carpark/domain/exceptions/InvalidName'
+require 'carpark/use_case/exceptions/CarNotExisting'
 require 'carpark_interface_adapters/controller/helper/ControllerHelper'
 require 'carpark/use_case/AvailableSlotsUC'
 require 'carpark/use_case/BookSlotUC'
@@ -35,6 +36,8 @@ class Controller
       return userError 'no slot available'
     rescue DuplicateCar
       return userError "Car '#{name}' is already checked in"
+    rescue InvalidName
+      return userError "Name of car '#{name}' is not supported"
     end
   end
 

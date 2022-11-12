@@ -1,6 +1,5 @@
 require 'carpark/domain/Slot'
 require 'set'
-require 'carpark/domain/exceptions/CarNotExisting'
 require 'carpark/domain/exceptions/InvalidName'
 require 'carpark/domain/exceptions/InvalidSlot'
 
@@ -31,6 +30,9 @@ class SlotList
   end
 
   def setSlot(slotNumber, carName, time)
+    if carName.nil? || carName==EMPTY_VALUE
+      raise InvalidName
+    end
     slot = Slot.new(carName, time)
     setSlotValue(slotNumber, slot)
     nil
@@ -56,11 +58,10 @@ class SlotList
   end
 
   def slotOfCar(carName)
-    if carName.nil?
+    if carName.nil? || carName==EMPTY_VALUE
       raise InvalidName
     end
     slot = @slots.find_index {|slot| slot!=EMPTY_VALUE && slot.carName == carName}
-    raise CarNotExisting if slot.nil?
     slot
   end
 

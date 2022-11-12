@@ -1,3 +1,5 @@
+require 'carpark/use_case/exceptions/CarNotExisting'
+
 class CheckOutUC
     def initialize(repository)
       @repository = repository
@@ -6,6 +8,7 @@ class CheckOutUC
     def do(carName)
       slotList = @repository.getSlotList
       slotNumber = slotList.slotOfCar(carName)
+      raise CarNotExisting if slotNumber.nil?
       slot = slotList.emptySlot(slotNumber)
 
       duration = Time.now - slot.timeBooked

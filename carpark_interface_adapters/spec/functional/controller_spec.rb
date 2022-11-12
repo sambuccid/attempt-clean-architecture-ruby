@@ -63,6 +63,12 @@ describe "Controller endpoints" do
       expect(JSON.parse(resp[:body])["message"]).to eq("'name' parameter missing")
     end
 
+    it "errors if we pass an invalid name" do
+      resp = controller.checkInCar(:nil)
+      expect(resp[:status]).to eq(400)
+      expect(JSON.parse(resp[:body])["message"]).to eq("Name of car 'nil' is not supported")
+    end
+
     it "errors if we book same car twice" do
       # Given I have booked in a car
       controller.checkInCar("car1")
