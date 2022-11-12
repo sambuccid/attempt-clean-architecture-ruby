@@ -18,7 +18,7 @@ class WebServer < Sinatra::Base
     body controllerReturn[:body]
   end
 
-  def self.passToController(method: nil, path: nil, controllerMethod: nil, parameter: nil)
+  def self.endpointToController(method: nil, path: nil, controllerMethod: nil, parameter: nil)
     throw "Method missing" if method.nil?
     throw "Path missing" if path.nil?
     throw "controller method missing" if controllerMethod.nil?
@@ -33,27 +33,27 @@ class WebServer < Sinatra::Base
     end
   end
 
-  passToController(
+  endpointToController(
     method: :get,
     path: '/available-park-slots',
     controllerMethod: :availableParkSlots
   )
 
-  passToController(
+  endpointToController(
     method: :post,
     path: '/check-in-car',
     controllerMethod: :checkInCar,
     parameter: "name"
   )
 
-  passToController(
+  endpointToController(
     method: :get,
     path: '/find-car-in',
     controllerMethod: :findCarIn,
     parameter: "slot"
   )
 
-  passToController(
+  endpointToController(
     method: :post,
     path: '/check-out-car',
     controllerMethod: :checkOutCar,
@@ -62,7 +62,7 @@ class WebServer < Sinatra::Base
 
   configure do
     set :show_exceptions, true
-    enable :dump_errors,:raise_errors
+    enable :dump_errors, :raise_errors
     use Rack::ShowExceptions
   end
 end
