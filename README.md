@@ -2,7 +2,7 @@
 This was a project I used to try to apply Clean Architecture principles, hopefully it can be useful to other people as well.
 
 # The project
-The project is about managing a carpark, more infos about the [Business Requirements here] (Requirements.md)
+The project is about managing a carpark, more infos about the [Business Requirements here](./Requirements.md)
 
 The project is divided into 4 layers:
 * domain
