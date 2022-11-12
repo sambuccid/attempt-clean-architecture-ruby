@@ -1,5 +1,4 @@
 require 'rspec'
-require 'carpark/domain/exceptions/DuplicateCar'
 require 'carpark/domain/SlotList'
 
 describe SlotList do

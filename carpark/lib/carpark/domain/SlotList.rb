@@ -1,10 +1,8 @@
 require 'carpark/domain/Slot'
 require 'set'
 require 'carpark/domain/exceptions/CarNotExisting'
-require 'carpark/domain/exceptions/DuplicateCar'
 require 'carpark/domain/exceptions/InvalidName'
 require 'carpark/domain/exceptions/InvalidSlot'
-require 'carpark/domain/exceptions/ParkIsFull'
 
 class SlotList
    EMPTY_VALUE = :nil

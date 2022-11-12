@@ -1,3 +1,6 @@
+require 'carpark/use_case/exceptions/ParkIsFull'
+require 'carpark/use_case/exceptions/DuplicateCar'
+
 class BookSlotUC
 
   def initialize(repository)

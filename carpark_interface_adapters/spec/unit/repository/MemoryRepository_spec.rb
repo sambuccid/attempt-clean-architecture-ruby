@@ -1,5 +1,4 @@
 require 'rspec'
-require 'carpark/domain/exceptions/DuplicateCar'
 require 'carpark_interface_adapters/repository/MemoryRepository'
 
 describe MemoryRepository do

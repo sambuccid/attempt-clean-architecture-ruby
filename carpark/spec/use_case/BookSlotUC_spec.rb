@@ -1,5 +1,5 @@
 require 'rspec'
-require 'carpark/domain/exceptions/DuplicateCar'
+require 'carpark/use_case/exceptions/DuplicateCar'
 require 'carpark/use_case/BookSlotUC'
 require 'carpark/domain/SlotList'
 
