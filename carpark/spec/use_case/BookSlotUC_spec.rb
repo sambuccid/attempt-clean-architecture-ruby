@@ -25,13 +25,13 @@ describe BookSlotUC do
   it "we have less slot available when we book a slot" do
     slotList = SlotList.new(MAX_SLOTS)
     useCase = makeUseCase(slotList)
-    useCase.do('macchina')
+    useCase.do('car')
 
     slotsAvailable = slotList.emptySlots
     expect(slotsAvailable).to eq(MAX_SLOTS - 1)
   end
 
-  it "shouldn't be possible to book a slot with the same carName" do
+  it "shouldn't be possible to book a slot a car that has already booked in" do
     carName = 'car'
     slotList = SlotList.new(MAX_SLOTS)
     useCase = makeUseCase(slotList)
