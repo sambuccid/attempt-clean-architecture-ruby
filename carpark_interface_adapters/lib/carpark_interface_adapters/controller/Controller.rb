@@ -12,12 +12,11 @@ require 'carpark/use_case/CheckOutUC'
 class Controller
   include ControllerHelper
 
-  def initialize(memRepository)
-    @memRepository = memRepository
-    @availableSlotsUC = AvailableSlotsUC.new(memRepository)
-    @bookSlotUC = BookSlotUC.new(memRepository)
-    @getCarInSlotUC = GetCarInSlotUC.new(memRepository)
-    @checkOutUC = CheckOutUC.new(memRepository)
+  def initialize(repository)
+    @availableSlotsUC = AvailableSlotsUC.new(repository)
+    @bookSlotUC = BookSlotUC.new(repository)
+    @getCarInSlotUC = GetCarInSlotUC.new(repository)
+    @checkOutUC = CheckOutUC.new(repository)
   end
 
   def availableParkSlots
