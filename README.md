@@ -15,9 +15,9 @@ To separate better the layers I divided the project into 3 parts:
 * **carpark_interface_adapters**: a ruby gem with the interface adapters layer
 * **app**: a folder where I import the other gems, with the infrastructure layer
 
-In this way it's not possible for the `carpark` gem(domain and use cases) to use any code from the interface adapters.
+In this way it's not possible for the `carpark` gem to use any code from the interface adapters.
 
-While the `carpark_interface_adapters`(interface adapters) imports the `carpark` gem and can use it.
+While the `carpark_interface_adapters` imports the `carpark` gem and can use it.
 
 And in the outer layer we have the app folder that contians the framework. Having this layer separated from the others is particularly important as it ensures that it's not possible in inner layers to depend on any part of the framework.
 
@@ -27,10 +27,10 @@ This is a gem containing the domain objects and the use cases.
 The **domain** layer contains 2 objects and it doesn't contain much logic.
 While the **use cases** layer contains the actions that a user can do, with all the logic needed to perform the action.
 
-The **use cases** are defined using the command pattern, and they accept and return just simple string or numbers, so I haven't defined Interfaces to represents **in and out Ports** between use cases and interface adapters.
+The **use cases** are defined using the command pattern, and they accept and return just simple string or numbers, so there aren't Interfaces to represents **in and out Ports** between use cases and interface adapters.
 
 ### carpark_interface_adapters
-This is a gem containing the controllers and repositories, it imports the carpark gem to be able to call the use cases.
+This is a gem containing the controllers and repositories, it imports the `carpark` gem to be able to call the use cases.
 
 The only repository is implemented in memory, it doesn't implement any Interface because in Ruby they are not strictly necessary.
 
@@ -41,7 +41,7 @@ The cotroller contains all the endpoints of the application, validation of input
 In this layer there are also tests that test all the functionalities of the application.
 
 ### app
-This is a ruby project that imports the "carpark" and the "carpark_interface_adapters" gems.
+This is a ruby project that imports the `carpark` and the `carpark_interface_adapters` gems.
 
 It contains the code to start the application and it defines the WebServer using the sinatra framework, its sole purpose is to connect controller with the framework delegating all the rest to the other layers.
 
