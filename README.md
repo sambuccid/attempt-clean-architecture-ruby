@@ -30,11 +30,11 @@ While the **use cases** layer contains the actions that a user can do, with all 
 The **use cases** are defined using the command pattern, and they accept and return just simple string or numbers, so there aren't Interfaces to represents **in and out Ports** between use cases and interface adapters.
 
 ### carpark_interface_adapters
-This is a gem containing the controllers and repositories, it imports the `carpark` gem to be able to call the use cases.
+This is a gem containing the **controllers** and **repositories**, it imports the `carpark` gem to be able to call the use cases.
 
-The only repository is implemented in memory, it doesn't implement any Interface because in Ruby they are not strictly necessary.
+The only **repository** is implemented in memory, it doesn't implement any Interface because in Ruby they are not strictly necessary.
 
-The controller is just one, and it does the job of both controller and presenter. This might violate the single responibility principle but there is very little code involved in presenting the data.
+The **controller** is just one, and it does the job of both controller and presenter. This might violate the single responibility principle but there is very little code involved in presenting the data.
 
 The cotroller contains all the endpoints of the application, validation of input parameters, and the formatting of the results.
 
@@ -46,8 +46,16 @@ This is a ruby project that imports the `carpark` and the `carpark_interface_ada
 It contains the code to start the application and it defines the WebServer using the sinatra framework, its sole purpose is to connect controller with the framework delegating all the rest to the other layers.
 
 ### How to run
-The project uses ruby 3.1.0, so you'll need it installed alongside bunder.
+The project uses ruby 3.1.0, so you'll need it installed as well as bunder.
 
-Then to run the webserver just run the `server.sh` file.
+#### Unix
+There are scripts to run the tests and the server, but they are made for a unix machine(_linux or mac_)
+
+To run the webserver just run the `server.sh` file; In the terminal you'll see in which port the webserver started.
 
 While to run all the tests you can run the `tests.sh` file.
+
+#### Windows
+To run the tests on windows you'll need to go in the folder of the layer you want to run the tests for and then run `bundle install` and after run `bundle exec rspec`.
+
+To start the webserver in windows you'll need to go in the `app` folder, run `bundle install` and then run `bundle exec ruby run.rb`; In the terminal you'll see in which port the webserver started.
