@@ -1,3 +1,0 @@
-require './WebServer'
-
-WebServer.run!
